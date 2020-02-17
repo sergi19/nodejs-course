@@ -1,0 +1,16 @@
+{
+  "name": "03-node-bases",
+  "version": "2.0.0",
+  "description": "This is a line command aplication",
+  "main": "app.js",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "yargs": "^15.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sergio Ceballos",
+  "license": "ISC"
+}
