@@ -1,22 +1,28 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
+
+const hbs = require('hbs');
+require('./hbs/helpers');
+
+const port = process.env.PORT || 3000;
 
 app.use(express.static(__dirname + '/public'));
 
-/*app.get('/', (req, res) => {
-    let out = {
-        name: 'Sergio',
-        age: 32,
-        surname: null,
-        url: req.url
-    }
-    res.send(out);
+//Express HBS
+hbs.registerPartials( __dirname + '/views/partials');
+
+app.set('view engine', 'hbs');
+app.get('/', (req, res) => {
+    res.render('home', {
+        name: 'serGio sACf',
+        year: new Date().getFullYear()
+    });
 });
 
-app.get('/data', (req, res) => {
-    res.send('Hello World!');
-});*/
+app.get('/about', (req, res) => {
+    res.render('about');
+});
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+app.listen(port, function () {
+  console.log(`Example app listening on port ${port}`);
 });
