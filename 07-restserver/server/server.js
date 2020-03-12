@@ -1,4 +1,6 @@
 const express = require('express');
+const mongoose = require('mongoose');
+
 const app = express();
 const bodyParser = require('body-parser');
 require('./config/config');
@@ -9,34 +11,13 @@ app.use(bodyParser.urlencoded({extended: false}));
 //parse application/json
 app.use(bodyParser.json());
 
-app.get('/user', (req, res) => {
-    res.json('get User')
-});
+app.use(require('./routes/user'));
 
-app.post('/user', (req, res) => {
-    let body = req.body;
-    if (!body.name) {
-        res.status(400).json({
-            ok: false,
-            message: 'The name field is required'
-        })
-    } else {
-        res.json({
-            person: body
-        })
-    }
-});
+mongoose.connect('mongodb://localhost:27017/coffee', (err, res) => {
+    if (err) throw err;
 
-app.put('/user/:id', (req, res) => {
-    let id = req.params.id;
-    res.json({
-        id
-    })
-});
-
-app.delete('/user', (req, res) => {
-    res.json('delete User')
-});
+    console.log('BASE DE DATOS ONLINE!!');
+})
 
 app.listen(process.env.PORT, () => {
     console.log(`Listening on port ${process.env.PORT}`);
