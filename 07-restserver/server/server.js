@@ -13,7 +13,9 @@ app.use(bodyParser.json());
 
 app.use(require('./routes/user'));
 
-mongoose.connect('mongodb://localhost:27017/coffee', (err, res) => {
+mongoose.connect(process.env.URLDB, 
+    { useNewUrlParser: true, useCreateIndex: true },
+    (err, res) => {
     if (err) throw err;
 
     console.log('BASE DE DATOS ONLINE!!');

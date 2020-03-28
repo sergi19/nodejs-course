@@ -13,6 +13,10 @@ let schemaUser = new Schema({
         type: String,
         required: [true, 'The name is required']
     },
+    age: {
+        type: Number,
+        required: false
+    },
     email: {
         type: String,
         unique: true,
