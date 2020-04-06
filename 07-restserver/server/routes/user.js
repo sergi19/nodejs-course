@@ -2,10 +2,10 @@ const express = require('express');
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const _ = require('underscore');
-
+const { tokenVerification, roleAdminVerification } = require('../middlewares/autentication');
 const app = express();
 
-app.get('/users', (req, res) => {
+app.get('/users', [tokenVerification, roleAdminVerification], (req, res) => {
 
     let from = Number(req.query.from) || 0;
     let reqLimit = Number(req.query.limit) || 5;
@@ -34,7 +34,7 @@ app.get('/users', (req, res) => {
         });
 });
 
-app.post('/user', (req, res) => {
+app.post('/user', [tokenVerification, roleAdminVerification], (req, res) => {
     let body = req.body;
     let user = new User({
         name: body.name,
@@ -61,7 +61,7 @@ app.post('/user', (req, res) => {
     });
 });
 
-app.put('/user/:id', (req, res) => {
+app.put('/user/:id', [tokenVerification, roleAdminVerification], (req, res) => {
     let id = req.params.id;
     let body = _.pick(req.body, ['name', 'age', 'email', 'img', 'role', 'state', 'google']);
 
@@ -83,7 +83,7 @@ app.put('/user/:id', (req, res) => {
     });
 });
 
-app.delete('/user/:id', (req, res) => {
+app.delete('/user/:id', [tokenVerification, roleAdminVerification], (req, res) => {
     let id = req.params.id;
 
     User.findByIdAndRemove(id, (err, user) => {
@@ -101,7 +101,7 @@ app.delete('/user/:id', (req, res) => {
     });
 });
 
-app.delete('/updateStatus/:id', (req, res) => {
+app.delete('/updateStatus/:id', [tokenVerification, roleAdminVerification], (req, res) => {
     let id = req.params.id;
     let newState = {
         status: false
