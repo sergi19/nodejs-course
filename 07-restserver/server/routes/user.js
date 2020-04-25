@@ -2,7 +2,7 @@ const express = require('express');
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const _ = require('underscore');
-const { tokenVerification, roleAdminVerification } = require('../middlewares/autentication');
+const { tokenVerification, roleAdminVerification } = require('../middlewares/authentication');
 const app = express();
 
 app.get('/users', [tokenVerification, roleAdminVerification], (req, res) => {
@@ -88,7 +88,7 @@ app.delete('/user/:id', [tokenVerification, roleAdminVerification], (req, res) =
 
     User.findByIdAndRemove(id, (err, user) => {
         if(err || !user) {
-            return res.status(400).json({
+            return res.status(err ? 500 : 400).json({
                 ok: false,
                 err: err ? err : `User not found`
             });

@@ -11,7 +11,7 @@ process.env.NODE_ENV =  process.env.NODE_ENV || 'dev';
 // =============
 // Token expiration date
 // =============
-process.env.TOKEN_EXPIRATION_DATE = 60 * 60 * 24 *30;
+process.env.TOKEN_EXPIRATION_DATE = '48h';
 
 // =============
 // Token Secret

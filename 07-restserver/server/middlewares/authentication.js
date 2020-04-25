@@ -27,7 +27,7 @@ let roleAdminVerification = (req, res, next) => {
         return res.status(401).json({
             ok: false,
             err: {
-                message: 'The role not allowed to this action'
+                message: `You don't have permissions for this action`
             }
         });
     }

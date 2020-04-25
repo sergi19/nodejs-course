@@ -31,7 +31,7 @@ app.post('/login', (req, res) => {
             return res.status(400).json({
                 ok: false,
                 err: {
-                    message: 'Wrong (user) or password'
+                    message: 'Wrong user or password'
                 }
             });
         }
@@ -40,7 +40,7 @@ app.post('/login', (req, res) => {
             return res.status(400).json({
                 ok: false,
                 err: {
-                    message: 'Wrong user or (password)'
+                    message: 'Wrong user or password'
                 }
             });
         }
