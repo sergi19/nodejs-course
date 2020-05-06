@@ -5,7 +5,7 @@ io.on('connection', (client) => {
 
     client.emit('messageFromServer', {
         user: 'Administrator',
-        message: 'Welcome to this app'
+        message: 'Welcome to Socket Bases app'
     });
 
     client.on('disconnect', () => {
